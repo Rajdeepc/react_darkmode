@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useState,useEffect} from 'react';
+import './App.scss'
+import './theme/light.scss';
+import './theme/dark.scss';
 
 function App() {
+  const getLocalThemeFromStorage = () => {
+    const themeSelected = JSON.parse(localStorage.getItem('dark'))
+    return themeSelected || false
+  }
+  
+  const [darkTheme, setDarkTheme] = useState(getLocalThemeFromStorage())
+
+
+  useEffect(() => {
+    localStorage.setItem('dark', JSON.stringify(darkTheme))
+  }, [darkTheme])
+
+
+  
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={darkTheme ? 'dark-theme' : 'light-theme'}>
+      <nav>
+        <div className="button-container">
+          <button onClick={() => setDarkTheme(prevTheme => !prevTheme)}>Toggle Theme</button>
+        </div>
+      </nav>
+      <div className="content">
+      <h1>{darkTheme ? 'Dark Mode' : 'Light Mode'}</h1>
+      </div>
     </div>
   );
 }
