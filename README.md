@@ -2,4 +2,4 @@
 
 ### See it Live
 
-[Working DEMO](darkmode-example.surge.sh)
+[http://darkmode-example.surge.sh](http://darkmode-example.surge.sh)
